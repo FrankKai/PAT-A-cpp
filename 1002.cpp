@@ -7,22 +7,8 @@
 
 #include <iostream>
 #include <map>
-#include <vector>
-#include <algorithm>
-#include <iomanip>
 
 using namespace std;
-
-struct Item
-{
-  int key;
-  double value;
-};
-
-bool compare(Item a, Item b)
-{
-  return a.key > b.key;
-}
 
 int main()
 {
@@ -38,36 +24,19 @@ int main()
       cin >> e >> c;
       double val = xmap[e] ? xmap[e] : 0;
       xmap[e] = val + c;
+      if (xmap[e] == 0)
+      {
+        xmap.erase(e);
+      }
     }
   }
-  vector<Item> vec;
-  for (auto item : xmap)
+  cout << xmap.size();
+  // map天然升序排列，从尾部开始遍历即可得到降序
+  map<int, double>::iterator it = xmap.end();
+  while (it != xmap.begin())
   {
-    if (item.second != 0)
-    {
-      Item cur = {item.first, item.second};
-      vec.push_back(cur);
-    }
-  }
-  sort(vec.begin(), vec.end(), compare);
-  cout << vec.size();
-  // cout.setf(ios::fixed);
-  // for (int n = 0; n <= vec.size() - 1; n++)
-  // {
-  //   if (n == vec.size() - 1)
-  //   {
-  //     cout << vec[n].key << " " << fixed << setprecision(1) << vec[n].value << endl;
-  //   }
-  //   else
-  //   {
-  //     cout << vec[n].key << " " << fixed << setprecision(1) << vec[n].value << " ";
-  //   }
-  // }
-  // cout.unsetf(ios::fixed);
-  int len = vec.size() - 1;
-  for (int n = 0; n <= len ; n++)
-  {
-    printf(" %d %.1f", vec[n].key, vec[n].value); // printf用于输出某某精度的小数更加方便
+    it--;                                      // xmap.end()的值为xmap的尾部边界地址，访问最后一项时，需要向前移动一位
+    printf(" %d %.1f", it->first, it->second); // printf用于输出某某精度的小数更加方便
   }
   return 0;
 }
