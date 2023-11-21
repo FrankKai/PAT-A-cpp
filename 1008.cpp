@@ -1,7 +1,7 @@
 // 上楼6秒 下楼4秒
 // 停下时停顿5秒
 // 不需要返回1楼
-// 相等时注意需要挺5秒
+// 相等时注意需要停5秒
 #include <iostream>
 
 using namespace std;
